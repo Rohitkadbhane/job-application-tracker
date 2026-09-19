@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens.
+ * Jobline reads like a transit map: a pale, cool-grey "paper", ink-green text,
+ * and one signal color per stage of the line.
+ */
+@theme static {
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #eef1ec;
+  --color-surface: #fbfcfa;
+  --color-ink: #19231f;
+  --color-muted: #55615b;
+  --color-line: #d3d9d1;
+  --color-line-strong: #b7c0b6;
+
+  --color-brand: #3557d6;
+  --color-brand-hover: #2a47b4;
+
+  --color-applied: #3557d6;
+  --color-applied-ink: #2440a8;
+  --color-applied-soft: #e5eafb;
+
+  --color-interview: #e39a00;
+  --color-interview-ink: #7a4b00;
+  --color-interview-soft: #fff0cc;
+
+  --color-selected: #1c9b5f;
+  --color-selected-ink: #0d6a3d;
+  --color-selected-soft: #d9f2e5;
+
+  --color-rejected: #b1465f;
+  --color-rejected-ink: #8c2c44;
+  --color-rejected-soft: #f7e2e7;
+
+  --color-danger: #b42318;
+  --color-danger-hover: #93190f;
+
+  --animate-track-draw: track-draw 700ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  --animate-pop: pop-in 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-toast: toast-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  @keyframes track-draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes pop-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* One consistent, always-visible keyboard focus style. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  dialog::backdrop {
+    background: color-mix(in srgb, var(--color-ink) 45%, transparent);
+    backdrop-filter: blur(2px);
+  }
+
+  input[type="date"] {
+    min-height: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
